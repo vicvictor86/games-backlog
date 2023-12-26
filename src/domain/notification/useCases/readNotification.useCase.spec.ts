@@ -1,4 +1,4 @@
-import { InMemoryNotificationsRepository } from 'test/repositories/InMemoryNotificationsRepository';
+import { InMemoryNotificationsRepository } from 'test/repositories/InMemoryNotifications.repository';
 import { makeNotification } from 'test/factories/makeNotification';
 import { ReadNotificationUseCase } from './readNotification.useCase';
 

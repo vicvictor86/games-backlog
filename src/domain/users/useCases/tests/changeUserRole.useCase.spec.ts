@@ -1,11 +1,11 @@
-import { InMemoryUsersRepository } from 'test/repositories/InMemoryUsersRepository';
+import { InMemoryUsersRepository } from 'test/repositories/InMemoryUsers.repository';
 import { makeUser } from 'test/factories/makeUser';
 import { ChangeUserRoleUseCase } from '../changeUserRole.useCase';
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let sut: ChangeUserRoleUseCase;
 
-describe('Create Brand Use Case', () => {
+describe('Change User Role Use Case', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository();
     sut = new ChangeUserRoleUseCase(inMemoryUsersRepository);

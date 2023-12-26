@@ -1,5 +1,5 @@
 import { makeUser } from 'test/factories/makeUser';
-import { InMemoryNotificationsRepository } from 'test/repositories/InMemoryNotificationsRepository';
+import { InMemoryNotificationsRepository } from 'test/repositories/InMemoryNotifications.repository';
 import { FetchNotificationsUseCase } from '../fetchNotifications.useCase';
 
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository;
