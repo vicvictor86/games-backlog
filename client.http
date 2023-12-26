@@ -1,0 +1,50 @@
+@baseUrl = http://localhost:3333
+@accessToken = {{authenticate.response.body.accessToken}}
+
+# @name create_account
+POST {{baseUrl}}/accounts
+Content-Type: application/json
+
+{
+  "name": "capivara",
+  "email": "capivaramajestosa@hotmail.com",
+  "password": "12345678",
+  "birthDate": "2023-01-10",
+  "cpf": "12345678902",
+  "phone": "12345678901",
+  "genre": "M"
+}   
+
+###
+# @name confirm_account
+PATCH {{baseUrl}}/accounts/confirm
+Content-Type: application/json
+
+{
+  "email": "capivaramajestosa@hotmail.com",
+  "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkMDg2YTllNS03MWQzLTQzOGQtOWU1YS0xZTMyNWE1YzYyYjMiLCJpYXQiOjE3MDMyNTk0Nzh9.AzwJZZ2b4y6oxDJMwfqV6oOO1zhyB9_84tBcxhb8nIwrhITRWTc_yGbcadtilYVe6jutlJa7mO5F9VeVSK_Kqw2ZYq4D1dCC16nds9durTrxweiU1FHNl5bAo-mBmxzo8JzejQUEJQZnB8zXCaOep30VL0cubqAMqGnBh6PuxKmvBPnHaXl-NqGnRpce8TwWcxuvSORhssWQlo3FNChyTMz2fqI7l50ImrcmrmbLIsSjldSPgFcFtYtInNog6ZHyhso7eUJmQwBw5CiXFsGnhYHvbIQOy3oL7g0kamFeYZrRiVR3_mv-EkFSqTPxwYbBP8a_qwTxvHKYEn2W6VNHrA"
+}   
+
+###
+# @name send_email_forget_password
+POST {{baseUrl}}/users/email/capivaramajestosa@hotmail.com/forget-password
+Content-Type: application/json
+
+{} 
+
+### 
+# @name authenticate
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "12345678"
+}
+
+### 
+# @name authenticate_by_forget_password
+POST {{baseUrl}}/users/email/capivaramajestosa@hotmail.com/login
+Content-Type: application/json
+
+{}
