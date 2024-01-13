@@ -43,15 +43,45 @@ export class GameInLog extends Entity<GameInLogProps> {
 
   get startedOn() { return this.props.startedOn; }
 
+  set startedOn(startedOn: Date) {
+    this.props.startedOn = startedOn;
+    this.touch();
+  }
+
   get finishedOn() { return this.props.finishedOn; }
+
+  set finishedOn(finishedOn: Date) {
+    this.props.finishedOn = finishedOn;
+    this.touch();
+  }
 
   get wasPlatinum() { return this.props.wasPlatinum; }
 
+  set wasPlatinum(wasPlatinum: boolean) {
+    this.props.wasPlatinum = wasPlatinum;
+    this.touch();
+  }
+
   get wasReplayed() { return this.props.wasReplayed; }
+
+  set wasReplayed(wasReplayed: boolean) {
+    this.props.wasReplayed = wasReplayed;
+    this.touch();
+  }
 
   get playedMedium() { return this.props.playedMedium; }
 
+  set playedMedium(playedMedium: PlayedMedium) {
+    this.props.playedMedium = playedMedium;
+    this.touch();
+  }
+
   get timePlayed() { return this.props.timePlayed; }
+
+  set timePlayed(timePlayed: number) {
+    this.props.timePlayed = timePlayed;
+    this.touch();
+  }
 
   get createdAt() { return this.props.createdAt; }
 

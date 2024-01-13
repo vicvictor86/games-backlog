@@ -21,7 +21,7 @@ export class NodemailerEmailProvider implements EmailProvider {
     to, subject, text, html,
   }: EmailContent): Promise<void> {
     await transporter.sendMail({
-      from: `"LifeSuplementos" <${env.EMAIL_USER}>`,
+      from: `"Backlog" <${env.EMAIL_USER}>`,
       to,
       subject,
       text,

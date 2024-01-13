@@ -1,6 +1,7 @@
 import { DomainEvents } from '@/core/events/domainEvents';
-import { GameInLog } from '@/domain/games/entities/gameInLog.entity';
-import { GamesInLogRepository } from '@/domain/games/repositories/gamesInLog.repository';
+import { PaginationParams } from '@/core/repositories/paginationParams';
+import { GameInLog } from '@/domain/gamesInLog/entities/gameInLog.entity';
+import { GamesInLogRepository } from '@/domain/gamesInLog/repositories/gamesInLog.repository';
 
 export class InMemoryGamesInLogRepository implements GamesInLogRepository {
   public items: GameInLog[] = [];
@@ -25,14 +26,22 @@ export class InMemoryGamesInLogRepository implements GamesInLogRepository {
     return gameInLog;
   }
 
-  async fetchManyByOwnerId(ownerId: string): Promise<GameInLog[] | null> {
-    const gameInLogs = this.items.filter((item) => item.ownerId.toString() === ownerId);
+  async fetchManyByOwnerId(ownerId: string, { page, returnPerPage }: PaginationParams): Promise<GameInLog[]> {
+    const gameInLogs = this.items
+      .filter((item) => item.ownerId.toString() === ownerId)
+      .slice((page - 1) * returnPerPage, page * returnPerPage);
 
-    if (!gameInLogs) {
+    return gameInLogs;
+  }
+
+  async findByGameIGDBIdAndOwnerId(gameIGDBId: string, ownerId: string): Promise<GameInLog | null> {
+    const gameInLog = this.items.find((item) => item.gameIGDBId.toString() === gameIGDBId && item.ownerId.toString() === ownerId);
+
+    if (!gameInLog) {
       return null;
     }
 
-    return gameInLogs;
+    return gameInLog;
   }
 
   async create(gameInLog: GameInLog) {
@@ -42,14 +51,24 @@ export class InMemoryGamesInLogRepository implements GamesInLogRepository {
   }
 
   async save(gameInLog: GameInLog) {
-    const gameinlogIndex = this.items.findIndex((item) => item.id.equals(gameInLog.id));
+    const gameInLogIndex = this.items.findIndex((item) => item.id.equals(gameInLog.id));
 
-    if (gameinlogIndex < 0) {
+    if (gameInLogIndex < 0) {
       return;
     }
 
-    this.items[gameinlogIndex] = gameInLog;
+    this.items[gameInLogIndex] = gameInLog;
 
     DomainEvents.dispatchEventsForAggregate(gameInLog.id);
+  }
+
+  async delete(gameInLog: GameInLog): Promise<void> {
+    const gameInLogIndex = this.items.findIndex((item) => item.id.equals(gameInLog.id));
+
+    if (gameInLogIndex < 0) {
+      return;
+    }
+
+    this.items.splice(gameInLogIndex, 1);
   }
 }

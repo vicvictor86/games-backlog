@@ -21,12 +21,10 @@ describe('Create Game In Log Use Case', () => {
     );
   });
 
-  it('should be able to change a user role', async () => {
+  it('should be able to create a log of a game', async () => {
     const user = makeUser({ role: 'CLIENT' });
-    const userToBeAdmin = makeUser({ role: 'CLIENT' });
 
     await inMemoryUsersRepository.create(user);
-    await inMemoryUsersRepository.create(userToBeAdmin);
 
     const result = await sut.execute({
       currentStatus: 'BACKLOG',
@@ -61,7 +59,7 @@ describe('Create Game In Log Use Case', () => {
     expect(review).toEqual(expect.objectContaining({
       rating: 5,
       content: 'Great game',
-      gameInLog: game.id,
+      gameInLogId: game.id,
       ownerId: user.id,
     }));
   });

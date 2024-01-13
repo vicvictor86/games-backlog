@@ -79,7 +79,7 @@ export class CreateGameInLogUseCase {
 
     const review = Review.create({
       ownerId: user.id,
-      gameInLog: game.id,
+      gameInLogId: game.id,
       content: reviewContent,
       rating,
     });

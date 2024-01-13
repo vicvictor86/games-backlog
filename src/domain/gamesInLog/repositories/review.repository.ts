@@ -6,4 +6,5 @@ export abstract class ReviewsRepository {
   abstract findByGameInLogId(gameInLogId: string): Promise<Review | null>;
   abstract create(review: Review): Promise<void>;
   abstract save(review: Review): Promise<void>;
+  abstract delete(review: Review): Promise<void>;
 }

@@ -4,7 +4,7 @@ import { Optional } from '@/core/types/optional';
 
 export interface ReviewProps {
   ownerId: UniqueEntityId;
-  gameInLog: UniqueEntityId;
+  gameInLogId: UniqueEntityId;
   rating: number;
   content: string;
 
@@ -15,7 +15,7 @@ export interface ReviewProps {
 export class Review extends Entity<ReviewProps> {
   get ownerId() { return this.props.ownerId; }
 
-  get gameInLog() { return this.props.gameInLog; }
+  get gameInLogId() { return this.props.gameInLogId; }
 
   get content() { return this.props.content; }
 

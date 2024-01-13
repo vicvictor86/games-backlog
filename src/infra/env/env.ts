@@ -13,6 +13,11 @@ export const envSchema = z.object({
   EMAIL_USER: z.string().optional().default(''),
   EMAIL_PASSWORD: z.string().optional().default(''),
   SECURE: z.string().optional().default('false'),
+
+  IGDB_BASE_URL: z.string().optional().default('https://api.igdb.com/v4'),
+  IGDB_CLIENT_ID: z.string().optional().default(''),
+  IGDB_CLIENT_SECRET: z.string().optional().default(''),
+  IGDB_GRANT_TYPE: z.string().optional().default('client_credentials'),
 });
 
 export type Env = z.infer<typeof envSchema>;
