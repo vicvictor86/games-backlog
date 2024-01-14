@@ -1,4 +1,5 @@
 import { DomainEvents } from '@/core/events/domainEvents';
+import { PaginationParams } from '@/core/repositories/paginationParams';
 import { Answer } from '@/domain/gamesInLog/entities/answer.entity';
 import { AnswersRepository } from '@/domain/gamesInLog/repositories/answer.repository';
 
@@ -15,14 +16,18 @@ export class InMemoryAnswersRepository implements AnswersRepository {
     return answer;
   }
 
-  async fetchManyByOwnerId(ownerId: string): Promise<Answer[]> {
-    const answers = this.items.filter((item) => item.ownerId.toString() === ownerId);
+  async fetchManyByOwnerId(ownerId: string, { page, returnPerPage }: PaginationParams): Promise<Answer[]> {
+    const answers = this.items
+      .filter((item) => item.ownerId.toString() === ownerId)
+      .slice((page - 1) * returnPerPage, page * returnPerPage);
 
     return answers;
   }
 
-  async fetchManyReviewId(reviewId: string): Promise<Answer[]> {
-    const answers = this.items.filter((item) => item.reviewId.toString() === reviewId);
+  async fetchManyReviewId(reviewId: string, { page, returnPerPage }: PaginationParams): Promise<Answer[]> {
+    const answers = this.items
+      .filter((item) => item.reviewId.toString() === reviewId)
+      .slice((page - 1) * returnPerPage, page * returnPerPage);
 
     return answers;
   }
