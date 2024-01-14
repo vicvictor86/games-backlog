@@ -74,6 +74,7 @@ describe('React to a Game Review Use Case', () => {
     expect(result.isRight()).toBe(true);
     const reviewsReactions = inMemoryReviewsReactionsRepository.items;
     expect(reviewsReactions.length).toBe(1);
+    expect(reviewsReactions[0].id).toEqual(reviewReaction.id);
     expect(reviewsReactions[0].reviewReaction).toBe('LOVE');
   });
 });
