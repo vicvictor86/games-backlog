@@ -25,12 +25,8 @@ export class InMemoryReviewsRepository implements ReviewsRepository {
     return review;
   }
 
-  async fetchManyByOwnerId(ownerId: string): Promise<Review[] | null> {
+  async fetchManyByOwnerId(ownerId: string): Promise<Review[]> {
     const reviews = this.items.filter((item) => item.ownerId.toString() === ownerId);
-
-    if (!reviews) {
-      return null;
-    }
 
     return reviews;
   }
